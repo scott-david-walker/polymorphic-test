@@ -3,9 +3,11 @@ using Api.Controllers.Framework;
 using Core;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+NpgsqlConnection.GlobalTypeMapper.EnableDynamicJson();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,7 +19,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.ConfigureMediatrBehaviours();
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseNpgsql("Host=localhost;Database=database;Username=postgres;Password=password;Include Error Detail = true"));
+    options => options.UseNpgsql("Host=localhost;Database=poly-test-databaes;Username=postgres;Password=password;Include Error Detail = true"));
 
 builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<ApplicationDbContext>();

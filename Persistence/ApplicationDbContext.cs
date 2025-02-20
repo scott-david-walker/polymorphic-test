@@ -8,6 +8,8 @@ namespace Persistence;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : IdentityDbContext<User>(options)
 {
+    public DbSet<SomeEntity> SomeEntity { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
